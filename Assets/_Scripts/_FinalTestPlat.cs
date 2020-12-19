@@ -7,12 +7,21 @@ public class _FinalTestPlat : MonoBehaviour
     public bool up = true;
     public bool down = false;
     public bool expanding = true;
+
     public float timer;
+
+
+    public AudioSource[] audio;
+    public AudioSource shrinkSound;
+    public AudioSource expandSound;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        shrinkSound = audio[0];
+        expandSound = audio[1];
     }
 
     // Update is called once per frame
@@ -68,6 +77,11 @@ public class _FinalTestPlat : MonoBehaviour
             expanding = false;
 
         };
+
+        if (!shrinkSound.isPlaying)
+        {
+            shrinkSound.Play();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -75,7 +89,12 @@ public class _FinalTestPlat : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             expanding = true;
+            if (!expandSound.isPlaying)
+            {
+                expandSound.Play();
+            }
         }
+        
     }
 
 
